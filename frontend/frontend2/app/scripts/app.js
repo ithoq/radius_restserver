@@ -10,6 +10,7 @@
  */
 angular
   .module('frontendApp', [
+    'config',
     'ngAnimate',
     'ngCookies',
     'ngMessages',
@@ -22,9 +23,7 @@ angular
     'amChartsDirective',
     'ordinal'
   ])
-  .constant('API_BASE', 'http://192.168.99.100:82')
-  .constant('API_EXTENSION', '/api/v1')
-  .service('urls',function(API_BASE, API_EXTENSION) { this.API = API_BASE + API_EXTENSION;})
+  .service('urls',function(ENV) { this.API = ENV.API_BASE + ENV.API_EXTENSION;})
   .config(function ($stateProvider,$urlRouterProvider) {
     $urlRouterProvider.otherwise('/');
 
@@ -63,8 +62,8 @@ angular
     });
 
   })
-  .run(function($rootScope, djangoAuth, $state, API_BASE) {
-        djangoAuth.initialize(API_BASE, false);
+  .run(function($rootScope, djangoAuth, $state, ENV) {
+        djangoAuth.initialize(ENV.API_BASE, false);
 
       djangoAuth.authenticationStatus(true)
         .then(function() {

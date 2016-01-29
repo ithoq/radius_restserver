@@ -9,3 +9,6 @@ bower_components
 .jscsrc
 .travis.yml
 .yo-rc.json
+app/scripts/config.js
+app/scripts/config/production.json
+.idea
