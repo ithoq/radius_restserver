@@ -7,6 +7,8 @@
   - service: frontend
     command: bower install
   - service: frontend
+    command: cp app/scripts/config/production.example.json app/scripts/config/production.json
+  - service: frontend
     command: grunt jshint
   - service: frontend
     command: grunt test
