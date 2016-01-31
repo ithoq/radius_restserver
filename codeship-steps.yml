@@ -1,14 +1,24 @@
-- service: radius
-  command: /bin/bash /usr/src/build/test-radius.sh
 - type: serial
+  name: Test builds
   steps:
-  - service: frontend
-    command: npm install
-  - service: frontend
-    command: bower install
-  - service: frontend
-    command: cp app/scripts/config/production.example.json app/scripts/config/production.json
-  - service: frontend
-    command: grunt jshint
-  - service: frontend
-    command: grunt test
+   - service: radius
+     name: Test RADIUS server configuration and startup
+     command: /bin/bash /usr/src/build/test-radius.sh
+   - type: serial
+     name: Test frontend
+     steps:
+     - service: frontend
+       name: Install Node.JS extensions
+       command: npm install
+     - service: frontend
+       name: install Bower extensions
+       command: bower install
+     - service: frontend
+       name: Create placeholder production config
+       command: cp app/scripts/config/production.example.json app/scripts/config/production.json
+     - service: frontend
+       name: Test for compliance with coding standard
+       command: grunt jshint
+     - service: frontend
+       name: Run test suite with PhantomJS
+       command: grunt test
