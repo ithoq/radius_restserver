@@ -22,8 +22,6 @@
    - type: serial
      name: Test django
      steps:
-     - service: postgres
-       name: Start Postgres
      - service: django
        name: Wait for postgres to start
        command: sleep 30
