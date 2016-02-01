@@ -1,9 +1,6 @@
-- type: serial
+- type: parallel
   name: Test builds
   steps:
-   - service: radius
-     name: Test RADIUS server configuration and startup
-     command: /bin/bash /usr/src/build/test-radius.sh
    - type: serial
      name: Test frontend
      steps:
@@ -22,3 +19,12 @@
      - service: frontend
        name: Run test suite with PhantomJS
        command: grunt test
+   - type: serial
+     name: Test django
+     steps:
+     - service: django
+       name: Migrate app
+       command: bash tests/test-migrate.sh
+     - service: django
+       name: Run Django tests
+       command: bash tests/test-suite.sh

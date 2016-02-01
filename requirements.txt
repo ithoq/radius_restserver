@@ -1,5 +1,5 @@
 pyrad==2.0
--e git://github.com/andrewyager/django-radius.git#egg=django-radius
+django-radius==1.1.0
 django-filter==0.11.0
 djangorestframework==3.3.1
 Markdown==2.6.4
