@@ -22,13 +22,13 @@
      - service: frontend
        name: Run test suite with PhantomJS
        command: grunt test
-    - type: serial
-      name: Test django
-      steps:
-      - service: django
-        name: Migrate app
-        command: ./manage.py migrate
-      - service: django
-        name: Run Django tests
-        command: ./manage.py test -d
+   - type: serial
+     name: Test django
+     steps:
+     - service: django
+       name: Migrate app
+       command: ./manage.py migrate
+     - service: django
+       name: Run Django tests
+       command: ./manage.py test -d
 
