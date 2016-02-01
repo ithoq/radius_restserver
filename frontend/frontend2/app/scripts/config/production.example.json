@@ -1,0 +1,5 @@
+{
+  "name": "production",
+  "API_BASE": "http://www.example.com",
+  "API_EXTENSION": "/api/v1"
+}

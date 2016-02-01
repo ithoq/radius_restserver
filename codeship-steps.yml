@@ -14,6 +14,9 @@
        name: install Bower extensions
        command: bower install
      - service: frontend
+       name: Create placeholder production config
+       command: cp app/scripts/config/production.example.json app/scripts/config/production.json
+     - service: frontend
        name: Test for compliance with coding standard
        command: grunt jshint
      - service: frontend
