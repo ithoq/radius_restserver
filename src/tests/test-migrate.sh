@@ -9,5 +9,14 @@ while [ $RV -gt 0 ]
     RV=$?
 done
 
+# check that MySQL has come up
+echo "USE radius;" | mysql -u radius --password=radius  -h mysqldb
+RETVAL=$?
+while [ $RETVAL -ne 0 ]; do
+	sleep 1
+	echo "USE radius;" | mysql -u radius --password=radius -h mysqldb
+	RETVAL=$?
+done
+
 ./manage.py migrate
 exit $?
