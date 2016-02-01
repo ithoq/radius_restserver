@@ -482,6 +482,7 @@ module.exports = function (grunt) {
     'wiredep',
     'concurrent:test',
     'postcss',
+    'ngconstant:development',
     'connect:test',
     'karma'
   ]);
