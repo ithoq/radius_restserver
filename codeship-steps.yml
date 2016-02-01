@@ -23,12 +23,8 @@
      name: Test django
      steps:
      - service: django
-       name: Wait for postgres to start
-       command: sleep 30
-     - service: django
        name: Migrate app
-       command: ./manage.py migrate
+       command: bash tests/test-migrate.sh
      - service: django
        name: Run Django tests
-       command: ./manage.py test -d
-
+       command: bash tests/test-suite.sh
