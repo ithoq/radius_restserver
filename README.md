@@ -27,3 +27,18 @@ docker-compose run --rm django ./manage.py createsuperuser
 #if you want to load the test data - recommended
 docker-compose run --rm radius /usr/src/build/load-test-data.sh
 ```
+
+## Development Instructions
+
+We follow a standard git development workflow. The master branch should always be deployable and is frequently
+tested by our CI server.
+
+Any changes you wish to make should be completed in a branch, and then a pull request should be initiated to
+this repo. If this is ready to merge, it will cause a CI build to be run which should identify any issues
+relating to the operability of your code.
+
+If you think you've found a bug and it makes sense to test for it (and... let's face it, when does it NOT make
+sense to test) please write a test, and ensure that it runs in the appropriate runner.
+
+We use Codeship for CI, and so our CI steps are defined in codeship-steps.yml. You can run this locally on your
+machine installing Jet using the instructions at https://codeship.com/documentation/docker/installation/.
