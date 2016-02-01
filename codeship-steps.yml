@@ -1,9 +1,6 @@
 - type: parallel
   name: Test builds
   steps:
-   - service: radius
-     name: Test RADIUS server configuration and startup
-     command: /bin/bash /usr/src/build/test-radius.sh
    - type: serial
      name: Test frontend
      steps:
