@@ -13,7 +13,7 @@ angular.module('frontendApp').config(function($stateProvider) {
         controller: 'StatsCtrl',
         controllerAs: 'stats',
     });
-}).controller('StatsCtrl', function(urls, $http, $scope, $timeout, $q, $state, $filter) {
+}).controller('StatsCtrl', function(urls, $http, $scope, $timeout, $q, $state, $filter, $rootScope) {
     // Today
     $scope.dateCurrent = new Date();
     $scope.dateCurrent = $filter('date')($scope.dateCurrent, 'yyyy-MM-dd');
@@ -207,7 +207,7 @@ angular.module('frontendApp').config(function($stateProvider) {
                 $scope.anniversary = billingdata[0].anniversary_day;
                 $scope.excessaction = billingdata[0].action;
                 $scope.service_status = billingdata[0].status;
-                $scope.username = billingdata[0].username;
+                $rootScope.username = billingdata[0].username;
                 if ($scope.excessaction === "shape" && $scope.service_status === "exceed") {
                     $scope.status = "shaped";
                 } else {
@@ -236,7 +236,7 @@ angular.module('frontendApp').config(function($stateProvider) {
                 });
 
                 $http({
-                    url: urls.API + '/quotausage/'+$scope.username+'/1.json/',
+                    url: urls.API + '/quotausage/'+$rootScope.username+'/1.json/',
                     method: 'GET',
                     params: params
                 }).success(function(usage) {
