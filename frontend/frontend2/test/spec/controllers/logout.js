@@ -53,9 +53,9 @@ describe('Check that you can log out when the backend is partially functioning',
       $state = $injector.get('$state');
       spyOn($state, 'go');
       $httpBackend = $injector.get('$httpBackend');
-      $httpBackend.when("GET", "http://192.168.99.100:82/rest-auth/user/")
+      $httpBackend.when("GET", "http://192.168.99.100:81/rest-auth/user/")
         .respond(403, "");
-      $httpBackend.when("POST", "http://192.168.99.100:82/rest-auth/logout/")
+      $httpBackend.when("POST", "http://192.168.99.100:81/rest-auth/logout/")
         .respond(200, "");
       LogoutCtrl = $controller('LogoutCtrl', {
       $scope: scope
@@ -88,9 +88,9 @@ describe('Check that you can log out when the backend is not functioning', funct
       $state = $injector.get('$state');
       spyOn($state, 'go');
       $httpBackend = $injector.get('$httpBackend');
-      $httpBackend.when("GET", "http://192.168.99.100:82/rest-auth/user/")
+      $httpBackend.when("GET", "http://192.168.99.100:81/rest-auth/user/")
         .respond(500, "");
-      $httpBackend.when("POST", "http://192.168.99.100:82/rest-auth/logout/")
+      $httpBackend.when("POST", "http://192.168.99.100:81/rest-auth/logout/")
         .respond(500, "");
       LogoutCtrl = $controller('LogoutCtrl', {
       $scope: scope
