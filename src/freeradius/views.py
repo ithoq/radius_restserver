@@ -36,7 +36,25 @@ class UserDataList(mixins.ListModelMixin, generics.GenericAPIView):
 
 
   def get(self, request, *args, **kwargs):
-    return self.list(request, *args, **kwargs)
+    response = self.list(request, *args, **kwargs)
+    # send 0 values for empty response
+    if len(response.data) == 0:
+      return Response([{
+        "data_hour": 0,
+        "datain": 0,
+        "dataout": 0,
+        "date": self.request.query_params.get('fromdate', None),
+        "totaldata": 0,
+        "username": self.request.user.username
+        },{
+        "data_hour": 23,
+        "datain": 0,
+        "dataout": 0,
+        "date": self.request.query_params.get('todate', None),
+        "totaldata": 0,
+        "username": self.request.user.username
+        }])
+    return response
 
 class UserQuotaList(mixins.ListModelMixin, generics.GenericAPIView):
   queryset = UserQuota.objects.all()
