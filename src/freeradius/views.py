@@ -8,6 +8,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404
 from rest_framework import mixins, generics, permissions
 from rest_framework.response import Response
+import datetime
 
 
 class UserDataList(mixins.ListModelMixin, generics.GenericAPIView):
@@ -36,7 +37,25 @@ class UserDataList(mixins.ListModelMixin, generics.GenericAPIView):
 
 
   def get(self, request, *args, **kwargs):
-    return self.list(request, *args, **kwargs)
+    response = self.list(request, *args, **kwargs)
+    # send 0 values for empty response
+    if len(response.data) == 0:
+      return Response([
+        UserDataSerializer(
+          UserData(
+            data_hour=0, datain=0, dataout=0,
+            date=datetime.datetime.strptime(self.request.query_params.get('fromdate', None), "%Y-%m-%d").date(),
+            totaldata=0, username=UserInfo(username=self.request.user.username)
+          )
+        ).data,
+        UserDataSerializer(
+          UserData(
+            data_hour=0, datain=0, dataout=0,
+            date=datetime.datetime.strptime(self.request.query_params.get('todate', None), "%Y-%m-%d").date(),
+            totaldata=0, username=UserInfo(username=self.request.user.username)
+          )
+        ).data])
+    return response
 
 class UserQuotaList(mixins.ListModelMixin, generics.GenericAPIView):
   queryset = UserQuota.objects.all()
